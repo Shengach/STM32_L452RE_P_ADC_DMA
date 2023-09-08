@@ -1,0 +1,10 @@
+main.c:69:1:__io_putchar	1
+main.c:85:5:main	4
+main.c:153:6:SystemClock_Config	4
+main.c:203:13:MX_ADC1_Init	3
+main.c:262:13:MX_USART2_UART_Init	2
+main.c:295:13:MX_DMA_Init	1
+main.c:313:13:MX_GPIO_Init	1
+main.c:362:6:HAL_ADC_ConvHalfCpltCallback	1
+main.c:366:6:HAL_ADC_ConvCpltCallback	1
+main.c:375:6:Error_Handler	1
