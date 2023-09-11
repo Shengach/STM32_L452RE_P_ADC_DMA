@@ -33,6 +33,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define ADC_CONVERTED_DATA_BUFFER_SIZE   ((uint32_t)  32)   /* Size of array aADCxConvertedData[] */
+#define Vref 1.8
 
 /* USER CODE END PD */
 
@@ -50,6 +51,7 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 static uint16_t   aADCxConvertedData[ADC_CONVERTED_DATA_BUFFER_SIZE];
 uint8_t idx;
+uint8_t LSB = Vref/4096;
 //__IO uint16_t uhADCxConvertedValue = 0;
 /* USER CODE END PV */
 
@@ -85,8 +87,8 @@ PUTCHAR_PROTOTYPE
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  uint16_t raw;
-  char msg[10];
+//  uint16_t raw;
+//  char msg[10];
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -131,7 +133,7 @@ int main(void)
 	  HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
 
 
-	  printf("aADCxConvertedData[%d] = %d\r\n", idx, aADCxConvertedData[idx]);
+	  printf("aADCxConvertedData[%d] = %d V \r\n", idx, aADCxConvertedData[idx]*LSB);
 	  idx++;
 	  if(idx > 31){
 		  idx = 0;
