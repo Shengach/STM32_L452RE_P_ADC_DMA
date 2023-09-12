@@ -50,8 +50,9 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 static uint16_t   aADCxConvertedData[ADC_CONVERTED_DATA_BUFFER_SIZE];
-uint8_t idx;
-uint8_t LSB = Vref/4096;
+uint8_t idx, i;
+float LSB = Vref/4096;
+float AVER_AMP = 0;
 //__IO uint16_t uhADCxConvertedValue = 0;
 /* USER CODE END PV */
 
@@ -132,14 +133,18 @@ int main(void)
   {
 	  HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
 
-
-	  printf("aADCxConvertedData[%d] = %d V \r\n", idx, aADCxConvertedData[idx]*LSB);
-	  idx++;
-	  if(idx > 31){
-		  idx = 0;
-		  printf("\r\n");
-
+	  for(i=0; i<32; i++){
+		  AVER_AMP = AVER_AMP + aADCxConvertedData[i]*LSB/32;
 	  }
+	  printf("Amp = %f V \r\n", AVER_AMP);
+	  AVER_AMP = 0;
+//	  printf("aADCxConvertedData[%d] = %f V \r\n", idx, aADCxConvertedData[idx]*LSB);
+//	  idx++;
+//	  if(idx > 31){
+//		  idx = 0;
+//		  printf("\r\n");
+//
+//	  }
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
